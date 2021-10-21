@@ -572,6 +572,20 @@ public class MovieAPI {
         return obj;
     }
 
+    /**
+     * @param id is a id genres.
+     * @param type true is a movie, false is a tv.
+     * @return
+     */
+    public Detail.Genres getGenresById(int id, boolean type) {
+        Detail.Genres[] genres = type ? genres_movie : genres_tv;
+        if (genres == null) return null;
+
+        for (Detail.Genres item : genres)
+            if (item.id == id) return item;
+        return null;
+    }
+
     //region User Methods
 
     /**
@@ -641,6 +655,7 @@ public class MovieAPI {
 
     /**
      * <p>Get detail info of user</p>
+     *
      * @return detail info account includes: name, id, username, avatar,...
      */
     public Account getDetailAccount() {
@@ -799,6 +814,7 @@ public class MovieAPI {
 
     /**
      * Get my rated movies
+     *
      * @return my movie list is rated. if false return null
      */
     public List<MovieItem> getRatedMovie() {
@@ -826,6 +842,7 @@ public class MovieAPI {
 
     /**
      * Get my rated tv
+     *
      * @return my tv list is rated. if false return null
      */
     public List<TVItem> getRatedTV() {
@@ -853,7 +870,8 @@ public class MovieAPI {
 
     /**
      * Get movies in my added watchlist
-     *  @return movies list added to watchlist
+     *
+     * @return movies list added to watchlist
      */
     public List<MovieItem> getWatchListMovie() {
         if (account == null) {
@@ -882,6 +900,7 @@ public class MovieAPI {
 
     /**
      * Get tv in my added watchlist
+     *
      * @returns Get tv in my added watchlist
      */
     public List<TVItem> getWatchListTV() {

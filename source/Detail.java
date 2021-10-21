@@ -42,7 +42,6 @@ public class Detail {
         public int id;
         @SerializedName("name")
         public String name;
-
     }
 
     static class Language {

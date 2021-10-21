@@ -271,6 +271,8 @@ Step 2: Go to `build.grable` in `dependencies` property
     }
 ```
 
+-    Other Object:
+
 ## MovieAPI
 
 -    Instructions for using all **MovieAPI** methods.
@@ -305,6 +307,23 @@ Step 2: Go to `build.grable` in `dependencies` property
       else
           TVItem movie = (TVItem) item;
     }
+```
+
+### Genres by id
+
+-    Genres (**Category**)
+-    `type` true is a movie, false is a TV.
+
+```java
+    // Movie
+    int movie_id = 28;
+    Detail.Genres genres = api.getGenresById(movie_id, true);
+    System.out.println(genres.name); // => Phim Hành Động
+
+    // TV
+    int tv_id = 16;
+    Detail.Genres genres = api.getGenresById(tv_id, false);
+    System.out.println(genres.name); // => Phim Hoạt Hình
 ```
 
 ### Top Rated Movie, TV
