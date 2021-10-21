@@ -271,7 +271,38 @@ Step 2: Go to `build.grable` in `dependencies` property
     }
 ```
 
--    Other Object:
+### Other Object
+
+-    Language from Detail Object `Detail.Language`
+
+```java
+    class Language {
+        english_name: String;
+        iso_639_1: String;
+        name: String;
+    }
+```
+
+-    Country from Detail Object `Detail.Country`
+
+```java
+    class Country{
+        iso_3166_1: String;
+        name: String;
+    }
+```
+
+-    Company from Detail Object `Detail.Company`
+
+```java
+
+    class Company{
+        id: int;
+        logo_path: String;
+        name: String;
+        origin_country: String;
+    }
+```
 
 ## MovieAPI
 
