@@ -10,16 +10,43 @@ This is a project call API for subject **android program**.
 
 ## Installation
 
-Step 1: Download and copy file, put it to my project android.
+Step 1: Go to `build.grable` in `dependencies` property
 
-Step 2: Go to `build.grable` in `dependencies` property
-
-```java
+```gradle
   dependencies {
     implementation "com.google.code.gson:gson:2.8.8"
     implementation "com.squareup.okhttp3:okhttp:4.9.0"
     implementation "com.squareup.picasso:picasso:2.71828"
   }
+```
+
+Step 2: Download source and extract all file in folder `source` into your project.
+
+```
+your_project
+    ├─── app
+    │     ├──── src
+    │     └...   ├───main
+    │            └...  ├───java <== extract here.
+    │                  └───res
+    └───...
+```
+
+Step 3: You need change the `package name` from `Account.java`, `Detail.java`, `Entertainment.java`, `Factory.java`, `MovieAPI.java`;
+
+```java
+    //change package to your project package
+    package <package_name>;
+```
+
+Step 3: using permission in `AndroidManifest.xml`:
+
+```xml
+<manifest ...>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    ...
+</mainifest>
 ```
 
 ## Quickview Object
@@ -295,7 +322,6 @@ Step 2: Go to `build.grable` in `dependencies` property
 -    Company from Detail Object `Detail.Company`
 
 ```java
-
     class Company{
         id: int;
         logo_path: String;
@@ -325,10 +351,10 @@ Step 2: Go to `build.grable` in `dependencies` property
 -    All data save into `api.trending`.
 
 ```java
-    ListData<Entertainment> list = api.getTrending();
+    List<Entertainment> list = api.getTrending();
 
-    // or get All ListData<T> from MovieAPI
-    ListData<Entertainment> dataTrending = api.trending;
+    // or get All List<T> from MovieAPI
+    List<Entertainment> dataTrending = api.trending;
 
     // check MovieItem or TVItem, then convert to Object
     for(Entertainment item: list)
