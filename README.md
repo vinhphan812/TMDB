@@ -610,12 +610,12 @@ Step 3: using permission in `AndroidManifest.xml`:
 | Option | Value      | Description       |
 | :----- | :--------- | :---------------- |
 | 0      | `w92`      | **MINI** size     |
-| 0      | `w185`     | **SMALL** size    |
-| 0      | `w300`     | **MEDIUM** size   |
-| 0      | `w500`     | **LARGE** size    |
-| 0      | `w780`     | **XLARGE** size   |
-| 0      | `w1280`    | **XXLARGE** size  |
-| 0      | `original` | **ORIGINAL** size |
+| 1      | `w185`     | **SMALL** size    |
+| 2      | `w300`     | **MEDIUM** size   |
+| 3      | `w500`     | **LARGE** size    |
+| 4      | `w780`     | **XLARGE** size   |
+| 5      | `w1280`    | **XXLARGE** size  |
+| 6      | `original` | **ORIGINAL** size |
 
 ### Image In ImageView
 
