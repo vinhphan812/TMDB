@@ -364,7 +364,7 @@ Step 3: using permission in `AndroidManifest.xml`:
 -    [`ImageAPI`](#ImageAPI)
 
 | #   | Method                                                                                | **Return Type** | Description                           |
-| :-- | :------------------------------------------------------------------------------------ | :-------------- | :------------------------------------ |
+| :-- | ------------------------------------------------------------------------------------- | :-------------- | :------------------------------------ |
 | 1   | [get(String path, int option, ImageView image)](#Image-In-ImageView)                  | void            | load image for ImageView.             |
 | 2   | [loadBackground(String path, int option, View background)](#Image-In-Background-View) | void            | load image for background View.       |
 | 3   | [getCorner(String path, int option, ImageView image)](#Image-Rounded-In-ImageView)    | void            | load image mark rounded for ImageView |
