@@ -340,26 +340,26 @@ Step 3: using permission in `AndroidManifest.xml`:
 | 2   | [MovieAPI(String APIKEY, String SessionID)](#Init-API-Object)                  | void                    | Init API with Account by **session_id**.     |
 | 3   | [getTrending()](#Trending)                                                     | List\<_Entertainment_\> | Trending list contain: **TV** and **Movie**. |
 | 4   | [getGenresById(int id, boolean type)](#Genres-by-id)                           | _Detail.Genres_         | **Genres** from id.                          |
-| 5   | [getTopRatedMovie()](#Top-Rated-Movie,-TV)                                     | List\<_MovieItem_\>     | Top Rated Movie.                             |
-| 6   | [getTopRatedTV()](#Top-Rated-Movie,-TV)                                        | List\<_TVItem_\>        | Top Rated TV show.                           |
-| 7   | [getPopularMovie()](#Top-Rated-Movie,-TV)                                      | List\<_MovieItem_\>     | Popular Movie.                               |
-| 8   | [getPopularTV()](#Popular-Movie,-TV)                                           | List\<_TVItem_\>        | Popular TV show.                             |
-| 9   | [getUpcoming()](#Popular-Movie,-TV)                                            | List\<_MovieItem_\>     | Upcoming Movie.                              |
+| 5   | [getTopRatedMovie()](#Top-Rated-Movie-TV)                                      | List\<_MovieItem_\>     | Top Rated Movie.                             |
+| 6   | [getTopRatedTV()](#Top-Rated-Movie-TV)                                         | List\<_TVItem_\>        | Top Rated TV show.                           |
+| 7   | [getPopularMovie()](#Top-Rated-Movie-TV)                                       | List\<_MovieItem_\>     | Popular Movie.                               |
+| 8   | [getPopularTV()](#Popular-Movie-TV)                                            | List\<_TVItem_\>        | Popular TV show.                             |
+| 9   | [getUpcoming()](#Popular-Movie-TV)                                             | List\<_MovieItem_\>     | Upcoming Movie.                              |
 | 10  | [search()](#Multi-Search)                                                      | List\<_Entertainment_\> | Contain: **Movie**, **TV**, **Person**.      |
-| 11  | [getCredit()](#Credit-Movie,-TV)                                               | Object[]                | Array Object include: _Casts_, _Crews_       |
-| 12  | [getSimilarMovie()](#Similar-Movie,-TV)                                        | List\<_MovieItem_\>     | Similar List of a movie.                     |
-| 13  | [getSimilarMovie()](#Similar-Movie,-TV)                                        | List\<_TVItem_\>        | Similar List of a tv show.                   |
+| 11  | [getCredit()](#Credit-Movie-TV)                                                | Object[]                | Array Object include: _Casts_, _Crews_       |
+| 12  | [getSimilarMovie()](#Similar-Movie-TV)                                         | List\<_MovieItem_\>     | Similar List of a movie.                     |
+| 13  | [getSimilarMovie()](#Similar-Movie-TV)                                         | List\<_TVItem_\>        | Similar List of a tv show.                   |
 | 14  | [Login()](#Login-with-the-movie-db-account)                                    | String                  | \<status\>\|\<session_id\>.                  |
 | 15  | [getDetailAccount()](#Detail-account)                                          | Account                 | Info Account TMDB.                           |
-| 16  | [getMyFavoritesMovie()](#My-Favorites-Movie,-TV)                               | List\<_MovieItem_\>     | Your Favorites Movie.                        |
-| 17  | [getMyFavoritesTV()](#My-Favorites-Movie,-TV)                                  | List\<_TVItem_\>        | Your Favorites TV.                           |
+| 16  | [getMyFavoritesMovie()](#My-Favorites-Movie-TV)                                | List\<_MovieItem_\>     | Your Favorites Movie.                        |
+| 17  | [getMyFavoritesTV()](#My-Favorites-Movie-TV)                                   | List\<_TVItem_\>        | Your Favorites TV.                           |
 | 18  | [MarkAsWatchlist(String id, boolean isMark, boolean type)](#Mark-As-Watchlist) | String                  | \<status\>\|\<mesage\>.                      |
-| 19  | [Rating(String id, boolean type, double value)](#Rating-Movie,-TV)             | String                  | \<status\>\|\<mesage\>.                      |
-| 20  | [DeleteRating(String id, boolean type)](#Rating-Movie,-TV)                     | String                  | \<status\>\|\<mesage\>.                      |
+| 19  | [Rating(String id, boolean type, double value)](#Rating-Movie-TV)              | String                  | \<status\>\|\<mesage\>.                      |
+| 20  | [DeleteRating(String id, boolean type)](#Rating-Movie-TV)                      | String                  | \<status\>\|\<mesage\>.                      |
 | 21  | [getRatedMovie()](#Mark-As-Watchlist)                                          | List\<_MovieItem_\>     | Your Rated Movies.                           |
 | 22  | [getRatedTV()](#Mark-As-Watchlist)                                             | List\<_TVItem_\>        | Your Rated TV show.                          |
-| 23  | [getWatchlistMovie()](#My-Watchlist-Movie,-TV)                                 | List\<_MovieItem_\>     | Your Watchlist Movies.                       |
-| 24  | [getWatchlistTV()](#My-Watchlist-Movie,-TV)                                    | List\<_TVItem_\>        | Your Watchlist TV show.                      |
+| 23  | [getWatchlistMovie()](#My-Watchlist-Movie-TV)                                  | List\<_MovieItem_\>     | Your Watchlist Movies.                       |
+| 24  | [getWatchlistTV()](#My-Watchlist-Movie-TV)                                     | List\<_TVItem_\>        | Your Watchlist TV show.                      |
 
 -    [`ImageAPI`](#ImageAPI)
 
