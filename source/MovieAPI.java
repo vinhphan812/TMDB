@@ -305,7 +305,7 @@ public class MovieAPI {
         JsonArray result = json.get("results").getAsJsonArray();
 
         trending.nextPage++;
-        trending.list = Factory.MvAndTv(result);
+        trending.list.addAll(Factory.MvAndTv(result));
 
         return trending.list;
     }
