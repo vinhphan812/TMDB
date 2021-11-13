@@ -394,7 +394,7 @@ Step 3: using permission in `AndroidManifest.xml`:
     List<Entertainment> list = api.getTrending();
 
     // or get All List<T> from MovieAPI
-    List<Entertainment> dataTrending = api.trending;
+    ListData<Entertainment> dataTrending = api.trending;
 
     // check MovieItem or TVItem, then convert to Object
     for(Entertainment item: list)
@@ -431,6 +431,7 @@ Step 3: using permission in `AndroidManifest.xml`:
 ```java
     // Movie
     List<MovieItem> topMovie = api.getTopRatedMovie();
+
     System.out.println("Top Rated Movie size: " + topMovie.size());
 
     // TV
