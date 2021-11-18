@@ -77,15 +77,7 @@ public class MovieAPI{
         if (isAccess)
             Init();
     }
-
-    protected MovieAPI(Parcel in) {
-        request_token = in.readString();
-        session_id = in.readString();
-        byte tmpIsAccess = in.readByte();
-        isAccess = tmpIsAccess == 0 ? null : tmpIsAccess == 1;
-        APIKEY = in.readString();
-    }
-
+    
     private Boolean checkSession() {
         getDetailAccount();
         System.out.println("account " + account);
