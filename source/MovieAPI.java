@@ -86,18 +86,6 @@ public class MovieAPI{
         APIKEY = in.readString();
     }
 
-    public static final Creator<MovieAPI> CREATOR = new Creator<MovieAPI>() {
-        @Override
-        public MovieAPI createFromParcel(Parcel in) {
-            return new MovieAPI(in);
-        }
-
-        @Override
-        public MovieAPI[] newArray(int size) {
-            return new MovieAPI[size];
-        }
-    };
-
     private Boolean checkSession() {
         getDetailAccount();
         System.out.println("account " + account);
@@ -946,19 +934,6 @@ public class MovieAPI{
         my_watchlist_tv.list.addAll(gson.fromJson(json.get("results"), listType));
 
         return my_watchlist_tv.list;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(request_token);
-        dest.writeString(session_id);
-        dest.writeByte((byte) (isAccess == null ? 0 : isAccess ? 1 : 2));
-        dest.writeString(APIKEY);
     }
     //endregion
 }
