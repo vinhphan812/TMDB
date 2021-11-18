@@ -41,7 +41,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
-public class MovieAPI {
+public class MovieAPI implements Parcelable {
     public Account account;
 
     public String request_token, session_id;
@@ -77,6 +77,26 @@ public class MovieAPI {
         if (isAccess)
             Init();
     }
+
+    protected MovieAPI(Parcel in) {
+        request_token = in.readString();
+        session_id = in.readString();
+        byte tmpIsAccess = in.readByte();
+        isAccess = tmpIsAccess == 0 ? null : tmpIsAccess == 1;
+        APIKEY = in.readString();
+    }
+
+    public static final Creator<MovieAPI> CREATOR = new Creator<MovieAPI>() {
+        @Override
+        public MovieAPI createFromParcel(Parcel in) {
+            return new MovieAPI(in);
+        }
+
+        @Override
+        public MovieAPI[] newArray(int size) {
+            return new MovieAPI[size];
+        }
+    };
 
     private Boolean checkSession() {
         getDetailAccount();
@@ -415,7 +435,7 @@ public class MovieAPI {
             similar_movie.nextPage++;
 
         JsonObject jsonObject = JsonParser.parseString(response).getAsJsonObject();
-        Type listType = new TypeToken<List<TVItem>>() {
+        Type listType = new TypeToken<List<Movie>>() {
         }.getType();
 
         similar_movie.list.addAll(gson.fromJson(jsonObject.get("results"), listType));
@@ -462,7 +482,7 @@ public class MovieAPI {
         popular_movie.nextPage++;
 
         JsonObject jsonObject = JsonParser.parseString(response).getAsJsonObject();
-        Type listType = new TypeToken<List<TVItem>>() {
+        Type listType = new TypeToken<List<MovieItem>>() {
         }.getType();
         popular_movie.list.addAll(gson.fromJson(jsonObject.get("results"), listType));
         return popular_movie.list;
@@ -503,7 +523,7 @@ public class MovieAPI {
         upcoming.nextPage++;
 
         JsonObject jsonObject = JsonParser.parseString(response).getAsJsonObject();
-        Type listType = new TypeToken<List<TVItem>>() {
+        Type listType = new TypeToken<List<MovieItem>>() {
         }.getType();
 
         upcoming.list.addAll(gson.fromJson(jsonObject.get("results"), listType));
@@ -926,6 +946,19 @@ public class MovieAPI {
         my_watchlist_tv.list.addAll(gson.fromJson(json.get("results"), listType));
 
         return my_watchlist_tv.list;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(request_token);
+        dest.writeString(session_id);
+        dest.writeByte((byte) (isAccess == null ? 0 : isAccess ? 1 : 2));
+        dest.writeString(APIKEY);
     }
     //endregion
 }
