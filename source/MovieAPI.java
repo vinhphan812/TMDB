@@ -41,7 +41,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
-public class MovieAPI implements Parcelable {
+public class MovieAPI{
     public Account account;
 
     public String request_token, session_id;
