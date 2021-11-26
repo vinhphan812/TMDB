@@ -488,7 +488,7 @@ Step 3: using permission in `AndroidManifest.xml`:
     List<Crew> crewMovie = (List<Crew>) creditMovie[1];
 
     // TV
-    Object[] creditTV = api.getCredit(tv_id, true);
+    Object[] creditTV = api.getCredit(tv_id, false);
     List<Cast> castTV = (List<Cast>) creditTV[0];
     List<Crew> crewTV = (List<Crew>) creditTV[1];
 ```
