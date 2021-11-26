@@ -350,18 +350,18 @@ Step 3: using permission in `AndroidManifest.xml`:
 | 12  | [getSimilarMovie()](#Similar-Movie-TV)                                         | List\<_MovieItem_\>     | Similar List of a movie.                     |
 | 13  | [getSimilarTV()](#Similar-Movie-TV)                                            | List\<_TVItem_\>        | Similar List of a tv show.                   |
 | 14  | [getDetailMovie()](#Detail-Movie-TV)                                           | _MovieItem_             | Detail Movie.                                |
-| 14  | [getDetailTV()](#Detail-Movie-TV)                                              | _TVItem_                | Detail TV.                                   |
-| 15  | [Login()](#Login-with-the-movie-db-account)                                    | String                  | \<status\>\|\<session_id\>.                  |
-| 16  | [getDetailAccount()](#Detail-account)                                          | Account                 | Info Account TMDB.                           |
-| 17  | [getMyFavoritesMovie()](#My-Favorites-Movie-TV)                                | List\<_MovieItem_\>     | Your Favorites Movie.                        |
-| 18  | [getMyFavoritesTV()](#My-Favorites-Movie-TV)                                   | List\<_TVItem_\>        | Your Favorites TV.                           |
-| 19  | [MarkAsWatchlist(String id, boolean isMark, boolean type)](#Mark-As-Watchlist) | String                  | \<status\>\|\<mesage\>.                      |
-| 20  | [Rating(String id, boolean type, double value)](#Rating-Movie-TV)              | String                  | \<status\>\|\<mesage\>.                      |
-| 21  | [DeleteRating(String id, boolean type)](#Rating-Movie-TV)                      | String                  | \<status\>\|\<mesage\>.                      |
-| 22  | [getRatedMovie()](#Mark-As-Watchlist)                                          | List\<_MovieItem_\>     | Your Rated Movies.                           |
-| 23  | [getRatedTV()](#Mark-As-Watchlist)                                             | List\<_TVItem_\>        | Your Rated TV show.                          |
-| 24  | [getWatchlistMovie()](#My-Watchlist-Movie-TV)                                  | List\<_MovieItem_\>     | Your Watchlist Movies.                       |
-| 25  | [getWatchlistTV()](#My-Watchlist-Movie-TV)                                     | List\<_TVItem_\>        | Your Watchlist TV show.                      |
+| 15  | [getDetailTV()](#Detail-Movie-TV)                                              | _TVItem_                | Detail TV.                                   |
+| 16  | [Login()](#Login-with-the-movie-db-account)                                    | String                  | \<status\>\|\<session_id\>.                  |
+| 17  | [getDetailAccount()](#Detail-account)                                          | Account                 | Info Account TMDB.                           |
+| 18  | [getMyFavoritesMovie()](#My-Favorites-Movie-TV)                                | List\<_MovieItem_\>     | Your Favorites Movie.                        |
+| 19  | [getMyFavoritesTV()](#My-Favorites-Movie-TV)                                   | List\<_TVItem_\>        | Your Favorites TV.                           |
+| 20  | [MarkAsWatchlist(String id, boolean isMark, boolean type)](#Mark-As-Watchlist) | String                  | \<status\>\|\<mesage\>.                      |
+| 21  | [Rating(String id, boolean type, double value)](#Rating-Movie-TV)              | String                  | \<status\>\|\<mesage\>.                      |
+| 22  | [DeleteRating(String id, boolean type)](#Rating-Movie-TV)                      | String                  | \<status\>\|\<mesage\>.                      |
+| 23  | [getRatedMovie()](#Mark-As-Watchlist)                                          | List\<_MovieItem_\>     | Your Rated Movies.                           |
+| 24  | [getRatedTV()](#Mark-As-Watchlist)                                             | List\<_TVItem_\>        | Your Rated TV show.                          |
+| 25  | [getWatchlistMovie()](#My-Watchlist-Movie-TV)                                  | List\<_MovieItem_\>     | Your Watchlist Movies.                       |
+| 26  | [getWatchlistTV()](#My-Watchlist-Movie-TV)                                     | List\<_TVItem_\>        | Your Watchlist TV show.                      |
 
 -    [`ImageAPI`](#ImageAPI)
 
