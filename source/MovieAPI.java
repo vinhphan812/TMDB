@@ -380,7 +380,7 @@ public class MovieAPI{
      * @return List of <i>TVItem</i>
      */
     public List<TVItem> getTopRatedTV() {
-        String response = requestServer("/movie/top_rated", "page=" + top_rated_tv.nextPage);
+        String response = requestServer("/tv/top_rated", "page=" + top_rated_tv.nextPage);
 
         if (response == null) return null;
 
