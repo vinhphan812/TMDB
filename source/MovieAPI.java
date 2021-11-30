@@ -415,7 +415,7 @@ public class MovieAPI{
             similar_movie.nextPage++;
 
         JsonObject jsonObject = JsonParser.parseString(response).getAsJsonObject();
-        Type listType = new TypeToken<List<Movie>>() {
+        Type listType = new TypeToken<List<MovieItem>>() {
         }.getType();
 
         similar_movie.list.addAll(gson.fromJson(jsonObject.get("results"), listType));
