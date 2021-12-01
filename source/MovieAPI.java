@@ -1,7 +1,6 @@
 //change package to your project package
 package <package_name>;
 
-import static java.lang.Thread.sleep;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
@@ -11,10 +10,10 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.view.View;
 import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
@@ -30,18 +29,16 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okhttp3.ResponseBody;
 
-public class MovieAPI{
+public class MovieAPI {
     public Account account;
 
     public String request_token, session_id;
@@ -73,11 +70,11 @@ public class MovieAPI{
      */
     public MovieAPI(String APIKEY) {
         this.APIKEY = APIKEY;
-        isAccess = checkAPIKey();
+        isAccess = checkAPIKey(true);
         if (isAccess)
             Init();
     }
-    
+
     private Boolean checkSession() {
         getDetailAccount();
         System.out.println("account " + account);
@@ -87,7 +84,7 @@ public class MovieAPI{
     public MovieAPI(String APIKEY, String session_id) {
         this.APIKEY = APIKEY;
         this.session_id = session_id;
-        isAccess = checkAPIKey() && checkSession();
+        isAccess = checkAPIKey(false) && checkSession();
 
         if (isAccess)
             Init();
@@ -129,7 +126,7 @@ public class MovieAPI{
      * @return Response JSON String is a result from server
      */
     private String requestServer(String path) {
-        return requestServer(path, "", null);
+        return requestServer(path, "", null, "GET");
     }
 
     /**
@@ -140,7 +137,7 @@ public class MovieAPI{
      * @return Response JSON String is a result from server
      */
     private String requestServer(String path, String params) {
-        return requestServer(path, params, null);
+        return requestServer(path, params, null, "GET");
     }
 
     /**
@@ -151,7 +148,7 @@ public class MovieAPI{
      * @return Response JSON string is a result from server
      */
     private String requestServer(String path, RequestBody body) {
-        return requestServer(path, "", body);
+        return requestServer(path, "", body, "POST");
     }
 
     /**
@@ -164,93 +161,21 @@ public class MovieAPI{
      * @return Response JSON String is a result from server
      */
     @Nullable
-    private String requestServer(String path, String params, RequestBody body) {
-        // declare responseString and status response for request
-        final String[] res = {null};
-        final boolean[] status = {false};
-
-        //not access => error
-        if (!isAccess) return null;
-
-        // make url with APIKEY & language
-        String HOST = "https://api.themoviedb.org/3";
-        String url = HOST + path + "?language=vi&api_key=" + APIKEY + (params.isEmpty() ? "" : "&" + params) + (session_id == null ? "" : "&session_id=" + session_id);
-
-        System.out.println(url);
-        Request request = new Request.Builder().method(body == null ? "GET" : "POST", body).url(url).build();
-
-        // send request and listen event response
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                System.out.println(e);
-                status[0] = true;
-            }
-
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                try (ResponseBody responseBody = response.body()) {
-                    res[0] = responseBody.string();
-                    status[0] = true;
-                }
-            }
-        });
-
-        // await response from server (tired)
-        while (true) {
-            if (status[0]) break;
-            try {
-                sleep(100);
-            } catch (InterruptedException e) {
-                System.out.println(e);
-            }
+    private String requestServer(String path, String params, RequestBody body, String method) {
+        RequestTask request = new RequestTask();
+        try {
+            return request.execute(path, params, body, method).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return null;
         }
-        return res[0];
+        return null;
     }
 
     private String deleteRequest(String path) {
-        // declare responseString and status response for request
-        final String[] res = {null};
-        final boolean[] status = {false};
-
-        //not access => error
-        if (!isAccess) return null;
-
-        // make url with APIKEY & language
-        String HOST = "https://api.themoviedb.org/3";
-        String url = HOST + path + "?language=vi&api_key=" + APIKEY + (session_id == null ? "" : "&session_id=" + session_id);
-
-        System.out.println(url);
-        Request request = new Request.Builder().method("DELETE", null).url(url).build();
-
-        // send request and listen event response
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                System.out.println(e);
-                status[0] = true;
-            }
-
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                try (ResponseBody responseBody = response.body()) {
-                    res[0] = responseBody.string();
-                    status[0] = true;
-                }
-            }
-        });
-
-        // await response from server (tired)
-        while (true) {
-            if (status[0]) break;
-            try {
-                sleep(100);
-            } catch (InterruptedException e) {
-                System.out.println(e);
-            }
-        }
-        return res[0];
-
+        return requestServer(path, null, null, "DELETE");
     }
     //endregion
 
@@ -259,17 +184,18 @@ public class MovieAPI{
      *
      * @return boolean indicates valid
      */
-    private Boolean checkAPIKey() {
+    private Boolean checkAPIKey(boolean isGuest) {
         // bypass requestServer
         isAccess = true;
         String response = requestServer("/authentication/guest_session/new");
-
-        if (response == null) return null;
+        System.out.println(response);
+        if (response == null) return false;
 
         JsonObject json = JsonParser.parseString(response).getAsJsonObject();
 
         if (!json.get("success").getAsBoolean()) return false;
-        //session_id = json.get("guest_session_id").getAsString();
+        if (isGuest)
+            session_id = json.get("guest_session_id").getAsString();
         return true;
     }
 
@@ -380,7 +306,7 @@ public class MovieAPI{
      * @return List of <i>TVItem</i>
      */
     public List<TVItem> getTopRatedTV() {
-        String response = requestServer("/tv/top_rated", "page=" + top_rated_tv.nextPage);
+        String response = requestServer("/movie/top_rated", "page=" + top_rated_tv.nextPage);
 
         if (response == null) return null;
 
@@ -573,7 +499,7 @@ public class MovieAPI{
     }
 
     /**
-     * @param id is a id genres.
+     * @param id   is a id genres.
      * @param type true is a movie, false is a tv.
      * @return
      */
@@ -678,6 +604,7 @@ public class MovieAPI{
      * @return Movie list has been added to favorites
      */
     public List<MovieItem> getMyFavoritesMovie() {
+        System.out.println(account + " " + session_id);
         if (account == null) {
             if (session_id == null) return null;
             else getDetailAccount();
@@ -927,7 +854,40 @@ public class MovieAPI{
 
         return my_watchlist_tv.list;
     }
+
     //endregion
+    class RequestTask extends AsyncTask<Object, String, String> {
+        private final OkHttpClient client = new OkHttpClient();
+
+        @Override
+        protected String doInBackground(Object... objects) {
+            String path = (String) objects[0];
+            String params = (String) objects[1];
+            RequestBody body = (RequestBody) objects[2];
+            String method = (String) objects[3];
+
+            // make url with APIKEY & language
+            String HOST = "https://api.themoviedb.org/3";
+            String url = HOST + path + "?language=vi&api_key=" + APIKEY + (params.isEmpty() ? "" : "&" + params) + (session_id == null ? "" : "&session_id=" + session_id);
+
+            System.out.println(url);
+            Request request = new Request.Builder().method(method, body).url(url).build();
+
+            try {
+                Response res = client.newCall(request).execute();
+                if (!res.isSuccessful()) return null;
+                return res.body().string();
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
+    }
 }
 
 /**
